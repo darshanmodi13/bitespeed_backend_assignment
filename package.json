@@ -48,7 +48,10 @@
 		"start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
 		"dev": "cross-env NODE_ENV=development nodemon",
 		"dev:build": "npm run build && cross-env NODE_ENV=development node dist/server.js",
-		"build": "tsc && tsc-alias"
+		"build": "tsc && tsc-alias",
+		"generate": "yarn drizzle-kit generate --config=./src/config/drizzle.config.ts",
+		"migrate": "yarn drizzle-kit migrate --config=./src/config/drizzle.config.ts",
+		"studio": "yarn drizzle-kit studio --config=./src/config/drizzle.config.ts"
 	},
 	"config": {
 		"commitizen": {

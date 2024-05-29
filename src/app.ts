@@ -1,4 +1,4 @@
-import { MONGO_URI, PORT, NODE_ENV } from '@config/env';
+import { PORT, NODE_ENV } from '@config/env';
 // Dependencies
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
