@@ -72,10 +72,10 @@ export class App {
 			info: { ...spec.info, title: 'Documentation' },
 			servers: [
 				{
-					url: `http://localhost:${this.port}/api`,
+					url: `https://bitespeed-backend-assignment-kj3f.onrender.com/api`,
 				},
 				{
-					url: `https://bitespeed-backend-assignment-kj3f.onrender.com/api`,
+					url: `http://localhost:${this.port}/api`,
 				},
 			],
 		};

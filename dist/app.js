@@ -68,10 +68,10 @@ class App {
             const spec = (0, routing_controllers_openapi_1.routingControllersToSpec)(metadataArgsStorage);
             const swaggerSpec = Object.assign(Object.assign({}, spec), { info: Object.assign(Object.assign({}, spec.info), { title: 'Documentation' }), servers: [
                     {
-                        url: `http://localhost:${this.port}/api`,
+                        url: `https://bitespeed-backend-assignment-kj3f.onrender.com/api`,
                     },
                     {
-                        url: `https://bitespeed-backend-assignment-kj3f.onrender.com/api`,
+                        url: `http://localhost:${this.port}/api`,
                     },
                 ] });
             this.app.use('/api/docs', swagger_ui_express_1.default.serve);
