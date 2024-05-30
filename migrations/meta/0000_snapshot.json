@@ -1,5 +1,5 @@
 {
-  "id": "90a3fa59-d74d-4f87-af0e-eb3789eadea4",
+  "id": "f8620059-87a5-42f7-b963-edcb20ec7d8f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "6",
   "dialect": "postgresql",
@@ -24,7 +24,7 @@
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "linkedId": {
           "name": "linkedId",
@@ -37,7 +37,8 @@
           "type": "linkPrecedence",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "'primary'"
         },
         "createdAt": {
           "name": "createdAt",
@@ -59,7 +60,22 @@
           "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "name_idx": {
+          "name": "name_idx",
+          "columns": [
+            "email"
+          ],
+          "isUnique": false
+        },
+        "email_idx": {
+          "name": "email_idx",
+          "columns": [
+            "phoneNumber"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}

@@ -2,7 +2,7 @@ import { PORT, NODE_ENV } from '@config/env';
 // Dependencies
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
-import { useExpressServer, getMetadataArgsStorage } from 'routing-controllers';
+import { useExpressServer, getMetadataArgsStorage, NotFoundError } from 'routing-controllers';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import compression from 'compression';
@@ -14,8 +14,7 @@ import { routingControllersToSpec } from 'routing-controllers-openapi';
 import swaggerUI from 'swagger-ui-express';
 
 // Base Error Class
-import BaseError from '@/errors/BaseError';
-import NotFoundError from '@/errors/NotFoundError';
+import { HTTPErrorHandler } from './middlewares/HTTPErrorHandler';
 
 export class App {
 	public app: express.Application;
@@ -25,19 +24,20 @@ export class App {
 	constructor() {
 		this.app = express();
 		this.env = NODE_ENV;
-		this.port = PORT;
+		this.port = PORT || 8989;
 
 		this.initializeMiddleWare();
 		this.initializeRoutes();
 		this.initializeSwagger();
 		this.notListedRoutesHandler();
-		this.initializeErrorHandler();
+		// this.initializeErrorHandler();
 	}
 
 	private initializeRoutes() {
 		useExpressServer(this.app, {
 			controllers: [__dirname + '/controllers/**/*.controller.ts', __dirname + '/controllers/**/*.controller.js'],
 			defaultErrorHandler: false,
+			middlewares: [HTTPErrorHandler],
 			routePrefix: '/api',
 		});
 	}
@@ -62,18 +62,7 @@ export class App {
 			if (!res.headersSent) throw new NotFoundError('Route Not Found');
 		});
 	}
-	private initializeErrorHandler() {
-		this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-			// Checking if Error is Instance Of Base error then we can send customize message
-			if (err instanceof BaseError) {
-				return res.status(err.statusCode).json({
-					message: err.message,
-				});
-			}
 
-			return res.status(503).send('Service Unavailable');
-		});
-	}
 	private async initializeSwagger() {
 		const metadataArgsStorage = getMetadataArgsStorage();
 		// Generate the OpenAPI specification
@@ -87,7 +76,7 @@ export class App {
 				},
 			],
 		};
-		console.log(swaggerSpec);
+
 		this.app.use('/api/docs', swaggerUI.serve);
 		this.app.get('/api/docs', swaggerUI.setup(swaggerSpec));
 	}
