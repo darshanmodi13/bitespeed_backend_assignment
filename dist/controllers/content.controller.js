@@ -17,7 +17,7 @@ const routing_controllers_openapi_1 = require("routing-controllers-openapi");
 const content_service_1 = require("../services/content.service");
 var Routes;
 (function (Routes) {
-    Routes["ROOT"] = "/v1";
+    Routes["ROOT"] = "";
     Routes["IDENTIFY"] = "/identify";
 })(Routes || (Routes = {}));
 let ContentController = class ContentController {

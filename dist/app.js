@@ -40,7 +40,6 @@ class App {
             controllers: [__dirname + '/controllers/**/*.controller.ts', __dirname + '/controllers/**/*.controller.js'],
             defaultErrorHandler: false,
             middlewares: [HTTPErrorHandler_1.HTTPErrorHandler],
-            routePrefix: '/api',
         });
     }
     initializeMiddleWare() {

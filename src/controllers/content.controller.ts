@@ -11,7 +11,7 @@ import { ContentService } from '@/services/content.service';
 import { TContentBody } from '@/types/content.type';
 
 enum Routes {
-	ROOT = '/v1',
+	ROOT = '',
 	IDENTIFY = '/identify',
 }
 

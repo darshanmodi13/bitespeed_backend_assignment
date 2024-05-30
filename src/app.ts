@@ -39,7 +39,6 @@ export class App {
 			controllers: [__dirname + '/controllers/**/*.controller.ts', __dirname + '/controllers/**/*.controller.js'],
 			defaultErrorHandler: false,
 			middlewares: [HTTPErrorHandler],
-			routePrefix: '/api',
 		});
 	}
 	private initializeMiddleWare() {
