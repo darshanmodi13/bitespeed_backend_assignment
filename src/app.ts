@@ -15,6 +15,7 @@ import swaggerUI from 'swagger-ui-express';
 
 // Base Error Class
 import { HTTPErrorHandler } from './middlewares/HTTPErrorHandler';
+import { url } from 'inspector';
 
 export class App {
 	public app: express.Application;
@@ -73,6 +74,9 @@ export class App {
 			servers: [
 				{
 					url: `http://localhost:${this.port}/api`,
+				},
+				{
+					url: `https://bitespeed-backend-assignment-kj3f.onrender.com/api`,
 				},
 			],
 		};

@@ -1,9 +1,6 @@
 import { JsonController, Get, Req, Res, Post, Body, BadRequestError } from 'routing-controllers';
 import { Request, Response } from 'express';
 
-// Response
-import StatusCodes from '@/utils/httpResponseCode';
-
 // Swagger
 import { OpenAPI } from 'routing-controllers-openapi';
 
@@ -26,7 +23,26 @@ class ContentController {
 		this._contentService = new ContentService();
 	}
 	@Post(Routes.IDENTIFY)
-	@OpenAPI({ description: 'Identify Route' })
+	@OpenAPI({
+		description: 'Identify Route',
+		requestBody: {
+			content: {
+				'application/json': {
+					schema: {
+						type: 'object',
+						properties: {
+							email: {
+								type: 'string',
+							},
+							phoneNumber: {
+								type: 'string',
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	identify(@Req() req: Request, @Res() res: Response, @Body() body: TContentBody) {
 		return this._contentService.identify(body);
 	}
